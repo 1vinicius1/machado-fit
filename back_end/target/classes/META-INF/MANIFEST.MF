@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Built-By: vinicius.santos
+Build-Jdk: 17.0.7
+Implementation-Title: PersonalFocus
+Implementation-Version: 1.0.0
+Implementation-Vendor-Id: com.projeto.academia
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-boot
+ -starter-parent/personal-focus
+Created-By: Maven Integration for Eclipse
+

@@ -43,6 +43,10 @@ public class UsuarioServico {
     @Autowired
     private UsuarioDao usuarioDAO;
 
+    /*
+     * Método responsável pelo cadastro de um Usuário
+     */
+
     @Transactional
     public String cadastrarUsuario(@Valid CadastrarUsuarioCmd cmd) {
         validarCmdCadastrar(cmd);
@@ -51,6 +55,10 @@ public class UsuarioServico {
         return MSG_SUCESSO_CADASTRO;
     }
 
+    /*
+     * Método responsável pelo login de um Usuário
+     */
+
     public UsuarioLogadoDTO login(@Valid LoginCmd cmd) {
         validarCmdLogin(cmd);
         UsuarioLogadoDTO usuario = usuarioDAO.autenticar(cmd);
@@ -58,9 +66,19 @@ public class UsuarioServico {
         return usuario;
     }
 
+    /*
+     * Método retorna a lista
+     * completa de Usuários com
+     * perfil definido como "ALUNO"
+     */
+
     public List<UsuarioDTO> listarAlunos() {
         return usuarioDAO.listarAlunos();
     }
+
+    /*
+     * Método responsável pela atualização de um Usuário
+     */
 
     @Transactional
     public String atualizarUsuario(@Valid AtualizarUsuarioCmd cmd) {
@@ -70,12 +88,21 @@ public class UsuarioServico {
         return MSG_SUCESSO_ATUALIZACAO;
     }
 
+    /*
+     * Método responsável pela exclusão de um Usuário
+     */
+
     public String excluirUsuario(long id) {
         ValidadorUtil.validarIdPositivo(id, LABEL_ID);
         validarExistenciaUsuario(id);
         usuarioDAO.excluirUsuario(id);
         return MSG_SUCESSO_EXCLUSAO;
     }
+
+    /*
+     * Este método retorna um usuário a partir do id
+     * do usuário desejado
+     */
 
     public UsuarioDTO obterPerfil(long id) {
         ValidadorUtil.validarIdPositivo(id, LABEL_ID);

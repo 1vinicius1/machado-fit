@@ -35,12 +35,20 @@ public class ExercicioServico {
     private ExercicioDAO exercicioDAO;
 
 
+    /*
+     * Método responsável pelo cadastro de um Exercício.
+     */
+
     @Transactional
     public String cadastrarExercicio(@Valid CadastrarExercicioCmd cmd) {
         validarCmdCadastrar(cmd);
         exercicioDAO.cadastrarExercicio(cmd);
         return MSG_SUCESSO_CADASTRO;
     }
+
+    /*
+     * Método responsável pela atualização de um Exercício.
+     */
 
     @Transactional
     public String atualizarExercicio (@Valid AtualizarExercicioCmd cmd) {
@@ -50,12 +58,21 @@ public class ExercicioServico {
         return MSG_SUCESSO_ATUALIZACAO;
     }
 
+    /*
+     * Método responsável pela exclusão de um Exercícios
+     */
+
     public String excluirExercicio(long id) {
         ValidadorUtil.validarIdPositivo(id, LABEL_ID);
         validarExistenciaExercicio(id);
         exercicioDAO.excluirExercicio(id);
         return MSG_SUCESSO_EXCLUSAO;
     }
+
+    /*
+     * Este método retorna um exercício a partir do id
+     * do exercício desejado
+     */
 
     public ExercicioDTO obterExercicio(long id) {
         ValidadorUtil.validarIdPositivo(id, LABEL_ID);
@@ -64,9 +81,19 @@ public class ExercicioServico {
         return exercicio;
     }
 
+    /*
+     * Este método retorna a lista dos exercícios
+     * de um treino através do id deste treino
+     */
+
     public List<ExercicioDTO> listarExerciciosPorTreino(long id) {
         return exercicioDAO.listarExerciciosPorTreino(id);
     }
+
+    /*
+     * Este método retorna a lista dos exercícios
+     * de um aluno através do id deste aluno
+     */
 
     public List<ExerciciosAlunoDTO> listarExerciciosPorAluno(long id) {
         return exercicioDAO.listarExerciciosPorAluno(id);

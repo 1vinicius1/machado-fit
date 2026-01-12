@@ -30,12 +30,20 @@ public class TreinoServico {
     @Autowired
     private TreinoDAO treinoDAO;
 
+    /*
+     * Método responsável por cadastrar um Treino.
+     */
+
     @Transactional
     public String cadastrarTreino(@Valid CadastrarTreinoCmd cmd) {
         validarCmdCadastrar(cmd);
         treinoDAO.cadastrarTreino(cmd);
         return MSG_SUCESSO_CADASTRO;
     }
+
+    /*
+     * Método responsável por atualizar um Treino.
+     */
 
     @Transactional
     public String atualizarTreino(@Valid AtualizarTreinoCmd cmd) {
@@ -45,12 +53,21 @@ public class TreinoServico {
         return MSG_SUCESSO_ATUALIZACAO;
     }
 
+    /*
+     * Método responsável pela exclusão de um Treino.
+     */
+
     public String excluirTreino(long id) {
         ValidadorUtil.validarIdPositivo(id, LABEL_ID);
         validarExistenciaTreino(id);
         treinoDAO.excluirTreino(id);
         return MSG_SUCESSO_EXCLUSAO;
     }
+
+    /*
+     * Este método retorna um treino a partir do id
+     * do treino desejado
+     */
 
     public TreinoDTO obterTreino(long id) {
         ValidadorUtil.validarIdPositivo(id, LABEL_ID);

@@ -30,11 +30,23 @@ public class HistoricoTreinoServico {
     @Autowired
     private UsuarioDao usuarioDao;
 
+    /*
+     * Método responsável por finalizar treino,
+     * subindo a data do treino e o nome do treino
+     * para tabela HistoricoTreino.
+     *
+     */
+
     public String finalizarTreino(@Valid FinalizarTreinoCmd cmd) {
         validarCmdFinalizarTreino(cmd);
         validarExistenciaAluno(cmd.getIdAluno());
         return executarRegistroFinalizacao(cmd);
     }
+
+    /*
+     * Método responsável por obter todos os treinos finalizados
+     * pelo aluno. O método espera o id do aluno desejado.
+     */
 
     public List<HistoricoTreinoDTO> obterCalendarioAluno(long idAluno) {
         ValidadorUtil.validarIdPositivo(idAluno, LABEL_ID_ALUNO);

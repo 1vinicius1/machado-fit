@@ -27,7 +27,6 @@ public class UsuarioDao {
     private static final String COLUNA_PERFIL = "perfil";
     private static final String COLUNA_DATA_NASCIMENTO = "data_nascimento";
 
-    //Classe do Spring que simplifica o acesso ao banco através do JDBC
     @Autowired
     private JdbcTemplate jdbcTemplate;
 

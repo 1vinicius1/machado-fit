@@ -25,4 +25,9 @@ export class UsuarioService {
   obterPerfil(id: number): Observable<UsuarioDTO> {
     return this.http.get<UsuarioDTO>(`${this.apiUrl}/perfil/${id}`);
   }
+
+  editarAluno(cmd: any): Observable<void> {
+    return this.http.put<void>(`${this.apiUrl}/atualizar`, cmd);
+}
+
 }

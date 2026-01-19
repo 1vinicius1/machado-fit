@@ -95,6 +95,9 @@ public class UsuarioServico {
     public String excluirUsuario(long id) {
         ValidadorUtil.validarIdPositivo(id, LABEL_ID);
         validarExistenciaUsuario(id);
+        if (usuarioDAO.getHistoricoUsuario(id) != null) {
+            usuarioDAO.excluirHistoricoUsuario(id);
+        }
         usuarioDAO.excluirUsuario(id);
         return MSG_SUCESSO_EXCLUSAO;
     }
@@ -150,7 +153,7 @@ public class UsuarioServico {
         if (usuario == null) {
             throw new IllegalArgumentException(MSG_ERRO_USUARIO_NAO_ENCONTRADO);
         }
+
+
     }
-
-
 }

@@ -27,6 +27,8 @@ import { HistoricoService } from './services/historico.service';
 
 // --- Guards ---
 import { AuthGuard } from './guards/auth.guard';
+import { EditarAlunoComponent } from './pages/editar-aluno/editar-aluno.component';
+import { CadastrarAlunoComponent } from './pages/cadastrar-aluno/cadastrar-aluno.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,9 @@ import { AuthGuard } from './guards/auth.guard';
     // Páginas Funcionais
     LoginComponent,
     PersonalAlunosComponent,
-    AlunoTreinoComponent
+    AlunoTreinoComponent,
+    EditarAlunoComponent,
+    CadastrarAlunoComponent
   ],
   imports: [
     BrowserModule,

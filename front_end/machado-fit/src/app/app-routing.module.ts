@@ -12,6 +12,8 @@ import { AuthGuard } from './guards/auth.guard';
 import { LoginComponent } from './pages/login/login.component';
 import { PersonalAlunosComponent } from './pages/personal-alunos/personal-alunos.component';
 import { AlunoTreinoComponent } from './pages/aluno-treino/aluno-treino.component';
+import { EditarAlunoComponent } from './pages/editar-aluno/editar-aluno.component';
+import { CadastrarAlunoComponent } from './pages/cadastrar-aluno/cadastrar-aluno.component';
 
 // ATENÇÃO: CadastroAluno ainda não foi criado o código, deixei comentado para não dar erro
 // import { CadastroAlunoComponent } from './pages/cadastro-aluno/cadastro-aluno.component';
@@ -47,7 +49,20 @@ const routes: Routes = [
       { 
         path: 'aluno/meus-treinos', 
         component: AlunoTreinoComponent 
+      },
+
+      // Editar Aluno
+      {
+        path: 'personal/editar-aluno/:id',
+        component: EditarAlunoComponent
+      },
+
+      // Cadastrar Aluno
+      {
+        path: 'personal/cadastrar-aluno',
+        component: CadastrarAlunoComponent
       }
+
     ]
   },
 

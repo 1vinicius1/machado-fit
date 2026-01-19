@@ -26,6 +26,8 @@ public class UsuarioDao {
     private static final String COLUNA_NOME = "nome";
     private static final String COLUNA_PERFIL = "perfil";
     private static final String COLUNA_DATA_NASCIMENTO = "data_nascimento";
+    private static final String COLUNA_ID_USUARIO = "aluno_id";
+
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
@@ -56,6 +58,12 @@ public class UsuarioDao {
 
     @Value("${select.usuarioDao.getPorCpf}")
     private String sqlGetPorCpf;
+
+    @Value("${select.usuarioDao.getHistoricoUsuario}")
+    private String sqlGetHistoricoUsuario;
+
+    @Value("${delete.usuarioDao.excluirHistoricoUsuario}")
+    private String sqlExcluirHistoricoUsuario;
 
     @Transactional
     public long cadastrarUsuario(CadastrarUsuarioCmd cmd) {
@@ -91,6 +99,17 @@ public class UsuarioDao {
     @Transactional
     public void excluirUsuario(long idUsuario) {
         jdbcTemplate.update(sqlExcluirUsuario, idUsuario);
+    }
+
+    @Transactional(readOnly = true)
+    public Long getHistoricoUsuario(long idUsuario) {
+        return jdbcTemplate.query(sqlGetHistoricoUsuario, new Object[] { idUsuario }, (rs, rowNum) -> rs.getLong(COLUNA_ID_USUARIO))
+                .stream().findFirst().orElse(null);
+    }
+
+    @Transactional
+    public void excluirHistoricoUsuario(long idHistoricoUsuario) {
+        jdbcTemplate.update(sqlExcluirHistoricoUsuario, idHistoricoUsuario);
     }
 
     @Transactional(readOnly = true)

@@ -1,7 +1,7 @@
 <div class="container mt-4">
   <div class="d-flex justify-content-between align-items-center mb-3">
     <h2><i class="fa fa-users"></i> Gestão de Alunos</h2>
-    <button class="btn btn-success" [routerLink]="['/personal/novo-aluno']">
+    <button class="btn btn-success" [routerLink]="['/personal/cadastrar-aluno']">
       <i class="fa fa-plus"></i> Novo Aluno
     </button>
   </div>
@@ -28,7 +28,7 @@
           <td>{{ aluno.dataNascimento | date:'dd/MM/yyyy' }}</td>
           <td class="text-center">
             <button class="btn btn-info btn-sm mr-1" [routerLink]="['/personal/aluno', aluno.id, 'treinos']" title="Gerenciar Treinos">
-              <i class="fa fa-dumbbell"></i>
+              <i class="fa fa-th" aria-hidden="true"></i>
             </button>
             <button class="btn btn-warning btn-sm mr-1" [routerLink]="['/personal/editar-aluno', aluno.id]" title="Editar Dados">
               <i class="fa fa-pencil"></i>

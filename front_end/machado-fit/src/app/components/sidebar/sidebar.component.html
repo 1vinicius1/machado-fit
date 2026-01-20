@@ -1,3 +1,32 @@
-<p>
-  sidebar works!
-</p>
+<div class="bg-light border-right h-100">
+  <div class="p-3 border-bottom">
+    <strong><i class="fa fa-bars"></i> Menu</strong>
+  </div>
+
+  <div class="list-group list-group-flush">
+    <a
+      class="list-group-item list-group-item-action"
+      [routerLink]="['/personal/alunos']"
+      routerLinkActive="active"
+    >
+      <i class="fa fa-users"></i> Alunos
+    </a>
+
+    <a
+      class="list-group-item list-group-item-action"
+      [routerLink]="['/personal/cadastrar-aluno']"
+      routerLinkActive="active"
+    >
+      <i class="fa fa-user-plus"></i> Cadastrar Aluno
+    </a>
+
+    <!-- <a
+      class="list-group-item list-group-item-action"
+      [routerLink]="['/aluno/meus-treinos']"
+      routerLinkActive="active"
+    >
+      <i class="fa fa-list-alt"></i> Meus Treinos
+    </a>-->
+    
+  </div>
+</div>

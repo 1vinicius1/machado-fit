@@ -12,7 +12,7 @@ public class UsuarioDTO {
     private Long id;
     private String nome;
     private String cpf;
-    //private String senha;
     private LocalDate dataNascimento;
     private String perfil;
+
 }

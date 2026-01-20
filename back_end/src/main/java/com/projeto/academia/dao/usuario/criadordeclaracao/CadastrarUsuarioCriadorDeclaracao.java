@@ -25,6 +25,14 @@ public class CadastrarUsuarioCriadorDeclaracao implements PreparedStatementCreat
     public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
         PreparedStatement ps = con.prepareStatement(sql, new String[] { COLUNA_ID });
 
+        Date dataSql = new Date(System.currentTimeMillis());
+        int anoAtual = dataSql.getYear();
+        int anoNascimento = Date.valueOf(cmd.getDataNascimento()).getYear();
+
+        if (anoNascimento > anoAtual) {
+            throw new IllegalArgumentException("A data de nascimento é inválida!");
+        }
+
         ps.setString(1, cmd.getCpf());
         ps.setString(2, cmd.getSenha());
         ps.setString(3, cmd.getNome());

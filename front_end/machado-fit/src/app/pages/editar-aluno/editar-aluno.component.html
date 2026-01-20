@@ -12,64 +12,69 @@
           </div>
 
           <form *ngIf="!loading" (ngSubmit)="salvar()">
-
             <div class="form-group">
               <label for="nome">Nome</label>
-              <input 
-                type="text" 
-                class="form-control" 
-                id="nome" 
+              <input
+                type="text"
+                class="form-control"
+                id="nome"
                 [(ngModel)]="aluno.nome"
                 name="nome"
-                required>
+                required
+              />
             </div>
 
             <div class="form-group">
               <label for="cpf">CPF</label>
-              <input 
-                type="text" 
-                class="form-control" 
-                id="cpf" 
+              <input
+                type="text"
+                class="form-control"
+                id="cpf"
                 [(ngModel)]="aluno.cpf"
                 name="cpf"
-                required>
+                required
+              />
             </div>
 
             <div class="form-group">
               <label for="dataNascimento">Data de Nascimento</label>
-              <input 
-                type="date" 
-                class="form-control" 
-                id="dataNascimento" 
+              <input
+                type="date"
+                class="form-control"
+                id="dataNascimento"
                 [(ngModel)]="aluno.dataNascimento"
                 name="dataNascimento"
-                required>
+                required
+              />
             </div>
 
             <div class="form-group">
               <label for="perfil">Perfil</label>
-              <input 
-                type="text" 
-                class="form-control" 
-                id="perfil" 
+              <input
+                type="text"
+                class="form-control"
+                id="perfil"
                 [(ngModel)]="aluno.perfil"
                 name="perfil"
-                disabled>
+                disabled
+              />
             </div>
 
             <div class="form-group mt-4">
-              <button 
-                type="submit" 
+              <button
+                type="submit"
                 class="btn btn-success mr-2"
-                [disabled]="salvando">
+                [disabled]="salvando"
+              >
                 <i class="fa fa-save"></i>
-                {{ salvando ? 'Salvando...' : 'Salvar Alterações' }}
+                {{ salvando ? "Salvando..." : "Salvar Alterações" }}
               </button>
-              <button 
-                type="button" 
+              <button
+                type="button"
                 class="btn btn-secondary"
                 (click)="cancelar()"
-                [disabled]="salvando">
+                [disabled]="salvando"
+              >
                 <i class="fa fa-times"></i> Cancelar
               </button>
             </div>

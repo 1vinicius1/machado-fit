@@ -17,6 +17,4 @@ interface LoginCmd {
   senha?: string;
 }
 
-export {
-    UsuarioDTO, UsuarioLogadoDTO, LoginCmd
-}
+export { UsuarioDTO, UsuarioLogadoDTO, LoginCmd };

@@ -8,15 +8,14 @@ import { UsuarioDTO } from "../../models/usuario.model";
   templateUrl: "./editar-aluno.component.html",
 })
 export class EditarAlunoComponent implements OnInit {
-
   aluno: UsuarioDTO = {
     id: 0,
-    nome: '',
-    cpf: '',
-    dataNascimento: '',
-    perfil: ''
+    nome: "",
+    cpf: "",
+    dataNascimento: "",
+    perfil: "",
   };
-  
+
   loading: boolean = false;
   salvando: boolean = false;
   alunoId: number = 0;
@@ -24,62 +23,69 @@ export class EditarAlunoComponent implements OnInit {
   constructor(
     private usuarioService: UsuarioService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
   ) {}
 
   ngOnInit() {
-    this.alunoId = +this.route.snapshot.paramMap.get('id')!;
-    if (this.alunoId) {
+    this.alunoId = Number(this.route.snapshot.paramMap.get("id"));
+
+    if (this.alunoId && this.alunoId > 0) {
       this.carregarAluno();
+    } else {
+      alert("ID do aluno inválido.");
+      this.router.navigate(["/personal/alunos"]);
     }
   }
 
   carregarAluno() {
     this.loading = true;
+
     this.usuarioService.obterPerfil(this.alunoId).subscribe(
-      data => {
+      (data) => {
         this.aluno = data;
         this.loading = false;
       },
-      err => {
-        console.error('Erro ao carregar aluno:', err);
-        alert('Erro ao carregar dados do aluno.');
+      (err) => {
+        console.error("Erro ao carregar aluno:", err);
+        alert("Erro ao carregar dados do aluno.");
         this.loading = false;
-        this.router.navigate(['/personal/alunos']);
-      }
+        this.router.navigate(["/personal/alunos"]);
+      },
     );
   }
 
   salvar() {
     if (!this.aluno.nome || !this.aluno.cpf || !this.aluno.dataNascimento) {
-      alert('Por favor, preencha todos os campos obrigatórios.');
+      alert("Por favor, preencha todos os campos obrigatórios.");
       return;
     }
 
     this.salvando = true;
+
     const cmd = {
-      id: this.aluno.id,
+      idUsuario: this.aluno.id,
       nome: this.aluno.nome,
       cpf: this.aluno.cpf,
       dataNascimento: this.aluno.dataNascimento,
-      perfil: this.aluno.perfil
+      perfil: this.aluno.perfil,
+      novaSenha: null, // ou '' se você preferir
     };
 
     this.usuarioService.editarAluno(cmd).subscribe(
-      res => {
-        alert('Aluno atualizado com sucesso!');
+      () => {
+        alert("Aluno atualizado com sucesso!");
         this.salvando = false;
-        this.router.navigate(['/personal/alunos']);
+        this.router.navigate(["/personal/alunos"]);
       },
-      err => {
-        console.error('Erro ao atualizar aluno:', err);
-        alert('Erro ao atualizar aluno.');
+      (err) => {
+        console.error("Erro ao atualizar aluno:", err);
+        alert("Erro ao atualizar aluno.");
         this.salvando = false;
-      }
+      },
     );
   }
 
   cancelar() {
-    this.router.navigate(['/personal/alunos']);
+    this.router.navigate(["/personal/alunos"]);
   }
 }

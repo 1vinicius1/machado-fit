@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { TreinoService } from '../../services/treino.service';
-import { AuthService } from '../../services/auth.service';
-import { HistoricoService } from '../../services/historico.service';
-import { ExerciciosAlunoDTO } from '../../models/exercicio.model';
+import { Component, OnInit } from "@angular/core";
+import { TreinoService } from "../../services/treino.service";
+import { AuthService } from "../../services/auth.service";
+import { HistoricoService } from "../../services/historico.service";
+import { ExerciciosAlunoDTO } from "../../models/exercicio.model";
 
 @Component({
-  selector: 'app-aluno-treino',
-  templateUrl: './aluno-treino.component.html'
+  selector: "app-aluno-treino",
+  templateUrl: "./aluno-treino.component.html",
 })
 export class AlunoTreinoComponent implements OnInit {
   treinosAgrupados: { [idTreino: number]: ExerciciosAlunoDTO[] } = {};
@@ -15,7 +15,7 @@ export class AlunoTreinoComponent implements OnInit {
   constructor(
     private treinoService: TreinoService,
     private authService: AuthService,
-    private historicoService: HistoricoService
+    private historicoService: HistoricoService,
   ) {}
 
   ngOnInit() {
@@ -25,7 +25,9 @@ export class AlunoTreinoComponent implements OnInit {
   // --- CORREÇÃO AQUI: Helper para o HTML ---
   // Verifica se o objeto tem chaves (se não está vazio)
   get temTreinos(): boolean {
-    return this.treinosAgrupados && Object.keys(this.treinosAgrupados).length > 0;
+    return (
+      this.treinosAgrupados && Object.keys(this.treinosAgrupados).length > 0
+    );
   }
   // ----------------------------------------
 
@@ -34,9 +36,9 @@ export class AlunoTreinoComponent implements OnInit {
     if (usuario) {
       this.loading = true;
       this.treinoService.listarExerciciosPorAluno(usuario.id).subscribe(
-        lista => {
+        (lista) => {
           this.treinosAgrupados = lista.reduce((acc, curr) => {
-            curr.concluido = false; 
+            curr.concluido = false;
             const key = curr.idTreino;
             if (!acc[key]) {
               acc[key] = [];
@@ -46,38 +48,46 @@ export class AlunoTreinoComponent implements OnInit {
           }, {});
           this.loading = false;
         },
-        err => {
-          alert('Erro ao carregar treinos.');
+        (err) => {
+          alert("Erro ao carregar treinos.");
           this.loading = false;
-        }
+        },
       );
     }
   }
 
   todosConcluidos(exercicios: ExerciciosAlunoDTO[]): boolean {
-    return exercicios && exercicios.length > 0 && exercicios.every(e => e.concluido);
+    return (
+      exercicios &&
+      exercicios.length > 0 &&
+      exercicios.every((e) => e.concluido)
+    );
   }
 
   finalizarTreino(idTreino: number) {
     const idAluno = this.authService.usuarioLogado.id;
-    const dataHoje = new Date().toISOString().split('T')[0];
+    const dataHoje = new Date().toISOString().split("T")[0];
 
     const cmd = {
       idAluno: idAluno,
       idTreino: idTreino,
-      dataFinalizacao: dataHoje
+      dataFinalizacao: dataHoje,
     };
 
-    if(confirm('Deseja finalizar este treino? Ele será salvo no seu histórico.')) {
+    if (
+      confirm("Deseja finalizar este treino? Ele será salvo no seu histórico.")
+    ) {
       this.historicoService.finalizarTreino(cmd).subscribe(
-        res => {
-          alert('Parabéns! Treino finalizado com sucesso.');
+        (res) => {
+          alert("Parabéns! Treino finalizado com sucesso.");
           // Limpa a tela ou reseta
           if (this.treinosAgrupados[idTreino]) {
-             this.treinosAgrupados[idTreino].forEach(e => e.concluido = false);
+            this.treinosAgrupados[idTreino].forEach(
+              (e) => (e.concluido = false),
+            );
           }
         },
-        err => alert('Erro ao finalizar treino. Tente novamente.')
+        (err) => alert("Erro ao finalizar treino. Tente novamente."),
       );
     }
   }

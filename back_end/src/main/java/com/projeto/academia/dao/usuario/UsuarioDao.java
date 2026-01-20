@@ -74,7 +74,7 @@ public class UsuarioDao {
     @Transactional
     public void atualizarUsuario(AtualizarUsuarioCmd cmd) {
         jdbcTemplate.update(sqlAtualizar, cmd.getNome(), cmd.getCpf(),
-                java.sql.Date.valueOf(cmd.getDataNascimento()), cmd.getIdUsuario());
+                java.sql.Date.valueOf(cmd.getDataNascimento()), cmd.getIdUsuario(), cmd.getStatus());
         if (cmd.getNovaSenha() != null && !cmd.getNovaSenha().isEmpty()) {
             jdbcTemplate.update(sqlAtualizarSenha, cmd.getNovaSenha(), cmd.getIdUsuario());
         }

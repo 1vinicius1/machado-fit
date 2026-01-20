@@ -1,11 +1,11 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { UsuarioDTO } from '../models/usuario.model';
+import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { Observable } from "rxjs";
+import { UsuarioDTO } from "../models/usuario.model";
 
-@Injectable({ providedIn: 'root' })
+@Injectable({ providedIn: "root" })
 export class UsuarioService {
-  private apiUrl = 'http://localhost:8080/usuario';
+  private apiUrl = "http://localhost:8080/usuario";
 
   constructor(private http: HttpClient) {}
 
@@ -14,20 +14,24 @@ export class UsuarioService {
   }
 
   cadastrar(cmd: any): Observable<string> {
-    // Backend retorna String, então definimos responseType: 'text'
-    return this.http.post(`${this.apiUrl}/cadastrar`, cmd, { responseType: 'text' });
+    return this.http.post(`${this.apiUrl}/cadastrar`, cmd, {
+      responseType: "text",
+    });
   }
 
   excluir(id: number): Observable<string> {
-    return this.http.delete(`${this.apiUrl}/excluir/${id}`, { responseType: 'text' });
+    return this.http.delete(`${this.apiUrl}/excluir/${id}`, {
+      responseType: "text",
+    });
   }
 
-  obterPerfil(id: number): Observable<UsuarioDTO> {
-    return this.http.get<UsuarioDTO>(`${this.apiUrl}/perfil/${id}`);
+  obterPerfil(idUsuario: number): Observable<UsuarioDTO> {
+    return this.http.get<UsuarioDTO>(`${this.apiUrl}/perfil/${idUsuario}`);
   }
 
-  editarAluno(cmd: any): Observable<void> {
-    return this.http.put<void>(`${this.apiUrl}/atualizar`, cmd);
-}
-
+  editarAluno(cmd: any): Observable<string> {
+    return this.http.put(`${this.apiUrl}/atualizar`, cmd, {
+      responseType: "text",
+    });
+  }
 }

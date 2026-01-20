@@ -154,6 +154,16 @@ public class UsuarioServico {
             throw new IllegalArgumentException(MSG_ERRO_USUARIO_NAO_ENCONTRADO);
         }
 
+    /*private static void validarDataNascimento(AtualizarUsuarioCmd cmd) {
+
+        Date dataSql = new Date(System.currentTimeMillis());
+        int anoAtual = dataSql.getYear();
+        int anoNascimento = Date.valueOf(cmd.getDataNascimento()).getYear();
+
+        if (anoNascimento > anoAtual) {
+            throw new IllegalArgumentException("A data de nascimento é inválida!");
+        }
+    }*/
 
     }
 }

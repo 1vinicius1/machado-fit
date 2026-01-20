@@ -6,6 +6,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import com.projeto.academia.enumeradores.PerfilUsuarioEnum;
+import com.projeto.academia.enumeradores.StatusEnum;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -25,6 +26,9 @@ public class AtualizarUsuarioCmd {
 
     @NotNull(message = "A data de nascimento é obrigatória")
     private LocalDate dataNascimento;
+
+    @NotNull(message = "O status do usuário é obrigatório")
+    private StatusEnum status;
 
     private String novaSenha;
 

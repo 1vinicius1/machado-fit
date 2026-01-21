@@ -19,9 +19,9 @@ export class UsuarioService {
     });
   }
 
-  excluir(id: number): Observable<string> {
-    return this.http.delete(`${this.apiUrl}/excluir/${id}`, {
-      responseType: "text",
+  inativar(id: number): Observable<string> {
+    return this.http.put<{ null: string }> (`${this.apiUrl}/inativar/${id}`, {
+      responseType: 'text',
     });
   }
 

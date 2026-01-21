@@ -30,18 +30,21 @@ export class PersonalAlunosComponent implements OnInit {
     );
   }
 
-  excluir(id: number) {
+  inativar(id: number) {
     if (
       confirm(
         "Tem certeza que deseja remover este aluno e todos os seus dados?",
       )
     ) {
-      this.usuarioService.excluir(id).subscribe(
-        (res) => {
-          alert("Aluno removido com sucesso!");
-          this.carregarAlunos(); // Atualiza a lista
+      this.usuarioService.inativar(id).subscribe(
+        () => {
+          alert("Aluno inativado com sucesso!");
+          this.carregarAlunos();
         },
-        (err) => alert("Não foi possível excluir o aluno."),
+
+        (error) => {
+          alert("Não foi possível inativar o aluno.");
+        },
       );
     }
   }

@@ -44,6 +44,11 @@ public class UsuarioControlador {
         return ResponseEntity.ok(usuarioServico.listarAlunos());
     }
 
+    @GetMapping("/listar-usuarios-inativos")
+    public ResponseEntity<List<UsuarioDTO>> listarUsuariosInativos() {
+        return ResponseEntity.ok(usuarioServico.listarUsuariosInativos());
+    }
+
     @PutMapping("/atualizar")
     public ResponseEntity<String> atualizar(@RequestBody @Valid AtualizarUsuarioCmd cmd) {
         return ResponseEntity.ok(usuarioServico.atualizarUsuario(cmd));
@@ -52,6 +57,16 @@ public class UsuarioControlador {
     @DeleteMapping("/excluir/{idUsuario}")
     public ResponseEntity<String> excluir(@PathVariable long idUsuario) {
         return ResponseEntity.ok(usuarioServico.excluirUsuario(idUsuario));
+    }
+
+    @PutMapping("/ativar/{idUsuario}")
+    public ResponseEntity<String> ativar(@PathVariable long idUsuario) {
+        return ResponseEntity.ok(usuarioServico.ativarUsuario(idUsuario));
+    }
+
+    @PutMapping("/inativar/{idUsuario}")
+    public ResponseEntity<String> inativar(@PathVariable long idUsuario) {
+        return ResponseEntity.ok(Map.of("message", usuarioServico.inativarUsuario(idUsuario)));
     }
 
     @GetMapping("/perfil/{idUsuario}")

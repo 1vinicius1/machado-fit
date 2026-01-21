@@ -15,6 +15,7 @@ import com.projeto.academia.cmd.usuario.LoginCmd;
 import com.projeto.academia.dao.usuario.criadordeclaracao.CadastrarUsuarioCriadorDeclaracao;
 import com.projeto.academia.dto.usuario.UsuarioDTO;
 import com.projeto.academia.dto.usuario.UsuarioLogadoDTO;
+import com.projeto.academia.util.ValidadorUtil;
 import com.projeto.academia.util.componente.dao.IDaoUtilComponente;
 
 @Repository
@@ -26,8 +27,6 @@ public class UsuarioDao {
     private static final String COLUNA_NOME = "nome";
     private static final String COLUNA_PERFIL = "perfil";
     private static final String COLUNA_DATA_NASCIMENTO = "data_nascimento";
-    private static final String COLUNA_ID_USUARIO = "aluno_id";
-
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
@@ -59,11 +58,15 @@ public class UsuarioDao {
     @Value("${select.usuarioDao.getPorCpf}")
     private String sqlGetPorCpf;
 
-    @Value("${select.usuarioDao.getHistoricoUsuario}")
-    private String sqlGetHistoricoUsuario;
+    @Value("${update.usuarioDao.inativarUsuario}")
+    private String sqlInativarUsuario;
 
-    @Value("${delete.usuarioDao.excluirHistoricoUsuario}")
-    private String sqlExcluirHistoricoUsuario;
+    @Value("${update.usuarioDao.ativarUsuario}")
+    private String sqlAtivarUsuario;
+
+    @Value("${select.usuarioDao.listarUsuariosInativos}")
+    private String sqlListarUsuariosInativos;
+
 
     @Transactional
     public long cadastrarUsuario(CadastrarUsuarioCmd cmd) {
@@ -74,7 +77,7 @@ public class UsuarioDao {
     @Transactional
     public void atualizarUsuario(AtualizarUsuarioCmd cmd) {
         jdbcTemplate.update(sqlAtualizar, cmd.getNome(), cmd.getCpf(),
-                java.sql.Date.valueOf(cmd.getDataNascimento()), cmd.getIdUsuario(), cmd.getStatus());
+                java.sql.Date.valueOf(cmd.getDataNascimento()), cmd.getIdUsuario());
         if (cmd.getNovaSenha() != null && !cmd.getNovaSenha().isEmpty()) {
             jdbcTemplate.update(sqlAtualizarSenha, cmd.getNovaSenha(), cmd.getIdUsuario());
         }
@@ -96,21 +99,32 @@ public class UsuarioDao {
                         ,rs.getString(COLUNA_PERFIL)));
     }
 
+    @Transactional(readOnly = true)
+    public List<UsuarioDTO> listarUsuariosInativos() {
+        return jdbcTemplate.query(sqlListarUsuariosInativos,
+                (rs, rowNum) -> new UsuarioDTO(rs.getLong(COLUNA_ID), rs.getString(COLUNA_NOME)
+                        ,rs.getString(COLUNA_CPF) ,rs.getDate(COLUNA_DATA_NASCIMENTO).toLocalDate()
+                        ,rs.getString(COLUNA_PERFIL)));
+
+    }
+
     @Transactional
     public void excluirUsuario(long idUsuario) {
         jdbcTemplate.update(sqlExcluirUsuario, idUsuario);
     }
 
     @Transactional(readOnly = true)
-    public Long getHistoricoUsuario(long idUsuario) {
-        return jdbcTemplate.query(sqlGetHistoricoUsuario, new Object[] { idUsuario }, (rs, rowNum) -> rs.getLong(COLUNA_ID_USUARIO))
-                .stream().findFirst().orElse(null);
+    public void inativarUsuario(long idUsuario) {
+        ValidadorUtil.validarIdPositivo(idUsuario, COLUNA_ID);
+        jdbcTemplate.update(sqlInativarUsuario, idUsuario);
     }
 
-    @Transactional
-    public void excluirHistoricoUsuario(long idHistoricoUsuario) {
-        jdbcTemplate.update(sqlExcluirHistoricoUsuario, idHistoricoUsuario);
+    @Transactional(readOnly = true)
+    public void ativarUsuario(long idUsuario) {
+        ValidadorUtil.validarIdPositivo(idUsuario, COLUNA_ID);
+        jdbcTemplate.update(sqlAtivarUsuario, idUsuario);
     }
+
 
     @Transactional(readOnly = true)
     public UsuarioDTO getUsuarioPorId(long id) {

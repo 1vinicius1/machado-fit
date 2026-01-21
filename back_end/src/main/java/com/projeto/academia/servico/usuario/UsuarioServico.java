@@ -1,5 +1,6 @@
 package com.projeto.academia.servico.usuario;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -33,6 +34,8 @@ public class UsuarioServico {
     private static final String MSG_SUCESSO_CADASTRO = "Usuário cadastrado com sucesso.";
     private static final String MSG_SUCESSO_ATUALIZACAO = "Dados do usuário atualizados com sucesso";
     private static final String MSG_SUCESSO_EXCLUSAO = "Usuário e todos os seus dados vinculados foram removidos";
+    private static final String MSG_SUCESSO_INATIVACAO = "Status do usuário foi alterado para 'Inativo' com sucesso";
+    private static final String MSG_SUCESSO_ATIVACAO = "Status do usuário foi alterado para 'Ativo' com sucesso";
 
     private static final String MSG_ERRO_USUARIO_NAO_ENCONTRADO = "Usuário não encontrado";
     private static final String MSG_ERRO_CPF_JA_CADASTRADO = "CPF já consta no sistema";
@@ -51,6 +54,7 @@ public class UsuarioServico {
     public String cadastrarUsuario(@Valid CadastrarUsuarioCmd cmd) {
         validarCmdCadastrar(cmd);
         validarCpfJaCadastrado(cmd.getCpf());
+        validarDataNascimento(cmd);
         usuarioDAO.cadastrarUsuario(cmd);
         return MSG_SUCESSO_CADASTRO;
     }
@@ -77,6 +81,15 @@ public class UsuarioServico {
     }
 
     /*
+     * Método retorna a lista
+     * completa de Usuários com
+     * status definido como "Inativo"
+     */
+    public List<UsuarioDTO> listarUsuariosInativos() {
+        return usuarioDAO.listarUsuariosInativos();
+    }
+
+    /*
      * Método responsável pela atualização de um Usuário
      */
 
@@ -84,6 +97,7 @@ public class UsuarioServico {
     public String atualizarUsuario(@Valid AtualizarUsuarioCmd cmd) {
         validarCmdAtualizar(cmd);
         validarExistenciaUsuario(cmd.getIdUsuario());
+        validarDataNascimento(cmd);
         usuarioDAO.atualizarUsuario(cmd);
         return MSG_SUCESSO_ATUALIZACAO;
     }
@@ -95,12 +109,36 @@ public class UsuarioServico {
     public String excluirUsuario(long id) {
         ValidadorUtil.validarIdPositivo(id, LABEL_ID);
         validarExistenciaUsuario(id);
-        if (usuarioDAO.getHistoricoUsuario(id) != null) {
-            usuarioDAO.excluirHistoricoUsuario(id);
-        }
         usuarioDAO.excluirUsuario(id);
         return MSG_SUCESSO_EXCLUSAO;
     }
+
+    /*
+     * Este método altera o status de um Usuário
+     * de "Ativo" para "Inativo". No front-end, a ação
+     * de deletar um usuário, chama este metódo, e não
+     * o método de deleção
+     */
+
+    @Transactional
+    public String inativarUsuario(long id) {
+        validarExistenciaUsuario(id);
+        usuarioDAO.inativarUsuario(id);
+        return MSG_SUCESSO_INATIVACAO;
+    }
+
+    /*
+     * Este método altera o status de um Usuário
+     * de "Inativo" para "Ativo"
+     */
+    @Transactional
+    public String ativarUsuario(long id) {
+        validarExistenciaUsuario(id);
+        usuarioDAO.ativarUsuario(id);
+        return MSG_SUCESSO_ATIVACAO;
+    }
+
+
 
     /*
      * Este método retorna um usuário a partir do id
@@ -153,17 +191,30 @@ public class UsuarioServico {
         if (usuario == null) {
             throw new IllegalArgumentException(MSG_ERRO_USUARIO_NAO_ENCONTRADO);
         }
+    }
 
-    /*private static void validarDataNascimento(AtualizarUsuarioCmd cmd) {
+    @SuppressWarnings("deprecation")
+    private static void validarDataNascimento(AtualizarUsuarioCmd cmd) {
 
-        Date dataSql = new Date(System.currentTimeMillis());
+        LocalDate dataSql = LocalDate.now();
         int anoAtual = dataSql.getYear();
-        int anoNascimento = Date.valueOf(cmd.getDataNascimento()).getYear();
+        int anoNascimento = cmd.getDataNascimento().getYear();
 
         if (anoNascimento > anoAtual) {
             throw new IllegalArgumentException("A data de nascimento é inválida!");
         }
-    }*/
+    }
 
+    @SuppressWarnings("deprecation")
+    private static void validarDataNascimento(CadastrarUsuarioCmd cmd) {
+
+        LocalDate dataSql = LocalDate.now();
+        int anoAtual = dataSql.getYear();
+        int anoNascimento = cmd.getDataNascimento().getYear();
+
+        if (anoNascimento > anoAtual) {
+            throw new IllegalArgumentException("A data de nascimento é inválida!");
+        }
     }
 }
+

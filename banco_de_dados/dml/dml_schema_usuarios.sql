@@ -15,7 +15,6 @@ insert into machado_fit.usuario (
 		 ('William Bonner', '08276978521', 'lenda123456', '1979-01-29', 'ALUNO'),
 	   	 ('Fatima Bernardes', '08521010547', 'lenda123456', '1997-06-10', 'ALUNO');
 
-
 insert into machado_fit.treino (aluno_id, dia_semana, nome)
 	values 
 	(2, 'SEGUNDA', 'Treino A'),

@@ -42,3 +42,5 @@ create table machado_fit.historico_treino(
 )
 
 ALTER TABLE machado_fit.usuario ALTER COLUMN perfil TYPE VARCHAR(20);
+
+alter table machado_fit.usuario add status varchar(20) not null default 'Ativo';

@@ -6,7 +6,7 @@ import { SimpleLayoutComponent } from "./layout/simple-layout/simple-layout.comp
 import { MainLayoutComponent } from "./layout/main-layout/main-layout.component";
 
 // Guards
-import { AuthGuard } from "./guards/auth.guard";
+import { AuthGuard, PerfilGuard } from "./guards/auth.guard";
 
 // Páginas
 import { LoginComponent } from "./pages/login/login.component";
@@ -40,6 +40,9 @@ const routes: Routes = [
       {
         path: "personal/alunos",
         component: PersonalAlunosComponent,
+        canActivate: [PerfilGuard],
+        data: {
+           perfis: ["PERSONAL"] },
       },
       // {
       //   path: 'personal/novo-aluno',
@@ -50,24 +53,36 @@ const routes: Routes = [
       {
         path: "aluno/meus-treinos",
         component: AlunoTreinoComponent,
+        canActivate: [PerfilGuard],
+        data: {
+           perfis: ["ALUNO"] },
       },
 
       // Editar Aluno
       {
         path: "personal/editar-aluno/:id",
         component: EditarAlunoComponent,
+        canActivate: [PerfilGuard],
+        data: {
+           perfis: ["PERSONAL"] },
       },
 
       // Cadastrar Aluno
       {
         path: "personal/cadastrar-aluno",
         component: CadastrarAlunoComponent,
+        canActivate: [PerfilGuard],
+        data: {
+           perfis: ["PERSONAL"] },
       },
 
       // Visualizar perfil do Aluno
       {
         path: "aluno/dados-aluno",
         component: DadosAlunoComponent,
+        canActivate: [PerfilGuard],
+        data: {
+           perfis: ["ALUNO"] },
       }
     ],
   },

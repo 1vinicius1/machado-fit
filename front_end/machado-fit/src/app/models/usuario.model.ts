@@ -5,7 +5,7 @@ interface UsuarioDTO {
   dataNascimento: string;
   perfil: string;
 }
-
+''
 interface UsuarioLogadoDTO {
   id: number;
   nome: string;

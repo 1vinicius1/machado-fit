@@ -66,12 +66,18 @@ public class UsuarioControlador {
 
     @PutMapping("/inativar/{idUsuario}")
     public ResponseEntity<String> inativar(@PathVariable long idUsuario) {
-        return ResponseEntity.ok(Map.of("message", usuarioServico.inativarUsuario(idUsuario)));
+        return ResponseEntity.ok(usuarioServico.inativarUsuario(idUsuario));
     }
 
     @GetMapping("/perfil/{idUsuario}")
     public ResponseEntity<UsuarioDTO> obterPerfil(@PathVariable long idUsuario) {
         return ResponseEntity.ok(usuarioServico.obterPerfil(idUsuario));
+    }
+
+    @GetMapping("/papel/{idUsuario}")
+    public ResponseEntity<Boolean> isPersonal(@PathVariable long idUsuario) {
+        return ResponseEntity.ok(usuarioServico.isPersonal(idUsuario));
+
     }
 
 }

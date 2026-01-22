@@ -80,6 +80,17 @@ public class UsuarioServico {
         return usuarioDAO.listarAlunos();
     }
 
+
+
+    public boolean isPersonal(long id) {
+        UsuarioDTO usuario = usuarioDAO.getUsuarioPorId(id);
+        if (usuario.getPerfil().equals("PERSONAL")) {
+            return true;
+        }
+        return false;
+
+    }
+
     /*
      * Método retorna a lista
      * completa de Usuários com

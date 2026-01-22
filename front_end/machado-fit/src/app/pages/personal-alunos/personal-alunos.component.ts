@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { UsuarioService } from "../../services/usuario.service";
 import { UsuarioDTO } from "../../models/usuario.model";
+import { PerfilUsuario } from "src/app/models/enums";
 
 @Component({
   selector: "app-personal-alunos",
@@ -11,6 +12,12 @@ export class PersonalAlunosComponent implements OnInit {
   loading: boolean = false;
 
   constructor(private usuarioService: UsuarioService) {}
+
+  isPersonal(idUsuario: number): boolean {
+    if (idUsuario != 1) {
+      return true;
+    }
+  }
 
   ngOnInit() {
     this.carregarAlunos();
@@ -38,12 +45,12 @@ export class PersonalAlunosComponent implements OnInit {
     ) {
       this.usuarioService.inativar(id).subscribe(
         () => {
-          alert("Aluno inativado com sucesso!");
+          alert("Aluno removido com sucesso!");
           this.carregarAlunos();
         },
 
         (error) => {
-          alert("Não foi possível inativar o aluno.");
+          alert("Não foi possível remover o aluno.");
         },
       );
     }

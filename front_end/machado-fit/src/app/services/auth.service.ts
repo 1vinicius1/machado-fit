@@ -44,4 +44,9 @@ export class AuthService {
   get usuarioLogado(): UsuarioLogadoDTO | null {
     return this.usuarioSubject.value;
   }
+
+  getPerfilUsuario(): string {
+    return this.usuarioLogado.perfil;
+}
+
 }

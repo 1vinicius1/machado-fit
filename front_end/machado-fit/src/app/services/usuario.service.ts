@@ -20,10 +20,10 @@ export class UsuarioService {
   }
 
   inativar(id: number): Observable<string> {
-    return this.http.put<{ null: string }> (`${this.apiUrl}/inativar/${id}`, {
-      responseType: 'text',
-    });
-  }
+  return this.http.put(`${this.apiUrl}/inativar/${id}`, null, {
+    responseType: 'text'
+  });
+}
 
   obterPerfil(idUsuario: number): Observable<UsuarioDTO> {
     return this.http.get<UsuarioDTO>(`${this.apiUrl}/perfil/${idUsuario}`);
@@ -34,4 +34,7 @@ export class UsuarioService {
       responseType: "text",
     });
   }
+
+
+  
 }

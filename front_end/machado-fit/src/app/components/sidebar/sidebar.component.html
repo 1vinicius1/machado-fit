@@ -5,31 +5,26 @@
 
   <div class="list-group list-group-flush">
 
-    <a
+    <a *ngIf="isPersonal"
       class="list-group-item list-group-item-action"
       [routerLink]="['/personal/alunos']"
-      routerLinkActive="active"
-    >
+      routerLinkActive="active">
       <i class="fa fa-users"></i> Alunos
     </a>
 
-    <a
+    <a *ngIf="isPersonal"
       class="list-group-item list-group-item-action"
       [routerLink]="['/personal/cadastrar-aluno']"
-      routerLinkActive="active"
-    >
+      routerLinkActive="active">
       <i class="fa fa-user-plus"></i> Cadastrar Aluno
-
-
     </a>
 
-    <!-- <a
+    <a *ngIf="isAluno"
       class="list-group-item list-group-item-action"
       [routerLink]="['/aluno/meus-treinos']"
-      routerLinkActive="active"
-    >
+      routerLinkActive="active">
       <i class="fa fa-list-alt"></i> Meus Treinos
-    </a>-->
+    </a>
     
   </div>
 </div>

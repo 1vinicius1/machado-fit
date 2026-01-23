@@ -81,16 +81,6 @@ public class UsuarioServico {
     }
 
 
-
-    public boolean isPersonal(long id) {
-        UsuarioDTO usuario = usuarioDAO.getUsuarioPorId(id);
-        if (usuario.getPerfil().equals("PERSONAL")) {
-            return true;
-        }
-        return false;
-
-    }
-
     /*
      * Método retorna a lista
      * completa de Usuários com
@@ -127,7 +117,7 @@ public class UsuarioServico {
     /*
      * Este método altera o status de um Usuário
      * de "Ativo" para "Inativo". No front-end, a ação
-     * de deletar um usuário, chama este metódo, e não
+     * de deletar um usuário chama este metódo, e não
      * o método de deleção
      */
 

@@ -1,30 +1,14 @@
 <nav class="navbar navbar-expand navbar-dark bg-dark">
-  <a class="navbar-brand" [routerLink]="['/personal/alunos']">
-    <i class="fa fa-heartbeat"></i> Machado Fit
+  <a class="navbar-brand">
+    <i class="fa fa-heartbeat"> </i> Machado Fit
   </a>
-
-  <ul class="navbar-nav mr-auto d-none d-sm-flex">
-    <li class="nav-item">
-    </li>
-
-    <!-- <li class="nav-item">
-      <a
-        class="nav-link"
-        [routerLink]="['/aluno/meus-treinos']"
-        routerLinkActive="active"
-      >
-        <i class="fa fa-list-alt"></i> Meus Treinos
-      </a>
-    </li>-->
-
-  </ul>
 
   <ul class="navbar-nav ml-auto">
     <li class="nav-item">
       <button
         type="button"
         class="btn btn-primary btn-outline-light ml-2"
-        (click)="sair()"
+        [routerLink]="['/dados-usuario/']"
       >
         <i class="fa fa-user"></i>
       </button>

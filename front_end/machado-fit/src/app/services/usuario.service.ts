@@ -26,7 +26,9 @@ export class UsuarioService {
 }
 
   obterPerfil(idUsuario: number): Observable<UsuarioDTO> {
-    return this.http.get<UsuarioDTO>(`${this.apiUrl}/perfil/${idUsuario}`);
+    return this.http.get<UsuarioDTO>(`${this.apiUrl}/perfil/${idUsuario}`, {
+      responseType: "json"
+    });
   }
 
   editarAluno(cmd: any): Observable<string> {
@@ -34,6 +36,8 @@ export class UsuarioService {
       responseType: "text",
     });
   }
+
+  
 
 
   

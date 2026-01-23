@@ -74,10 +74,4 @@ public class UsuarioControlador {
         return ResponseEntity.ok(usuarioServico.obterPerfil(idUsuario));
     }
 
-    @GetMapping("/papel/{idUsuario}")
-    public ResponseEntity<Boolean> isPersonal(@PathVariable long idUsuario) {
-        return ResponseEntity.ok(usuarioServico.isPersonal(idUsuario));
-
-    }
-
 }

@@ -7,7 +7,7 @@ import { Router } from "@angular/router";
   templateUrl: "./cadastrar-aluno.component.html",
 })
 export class CadastrarAlunoComponent implements OnInit {
-  // Model do formulário (não precisa ser o mesmo DTO do back)
+  
   aluno = {
     nome: "",
     cpf: "",

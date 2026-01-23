@@ -46,7 +46,7 @@ export class AuthService {
   }
 
   getPerfilUsuario(): string {
-    return this.usuarioLogado.perfil;
+    return this.usuarioLogado? this.usuarioLogado.perfil : null;
 }
 
 }

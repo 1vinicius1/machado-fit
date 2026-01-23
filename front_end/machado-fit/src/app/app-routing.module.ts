@@ -76,13 +76,13 @@ const routes: Routes = [
            perfis: ["PERSONAL"] },
       },
 
-      // Visualizar perfil do Aluno
+      // Visualizar perfil do Usuário
       {
-        path: "aluno/dados-aluno",
+        path: "dados-usuario",
         component: DadosAlunoComponent,
         canActivate: [PerfilGuard],
         data: {
-           perfis: ["ALUNO"] },
+           perfis: ["ALUNO", "PERSONAL"]},
       }
     ],
   },

@@ -15,6 +15,7 @@ import { AlunoTreinoComponent } from "./pages/aluno-treino/aluno-treino.componen
 import { EditarAlunoComponent } from "./pages/editar-aluno/editar-aluno.component";
 import { CadastrarAlunoComponent } from "./pages/cadastrar-aluno/cadastrar-aluno.component";
 import { DadosAlunoComponent } from "./pages/dados-aluno/dados-aluno.component";
+import { PersonalTreinosAlunosComponent } from "./pages/personal-treinos-alunos/personal-treinos-alunos.component";
 
 // ATENÇÃO: CadastroAluno ainda não foi criado o código, deixei comentado para não dar erro
 // import { CadastroAlunoComponent } from './pages/cadastro-aluno/cadastro-aluno.component';
@@ -55,7 +56,16 @@ const routes: Routes = [
         component: AlunoTreinoComponent,
         canActivate: [PerfilGuard],
         data: {
-           perfis: ["ALUNO"] },
+           perfis: ["ALUNO"]},
+      },
+
+      // Área do Personal - Treinos dos Alunos
+      {
+        path: "personal/treinos/:id",
+        component: PersonalTreinosAlunosComponent,
+        canActivate: [PerfilGuard],
+        data: {
+           perfis: ["PERSONAL"] },
       },
 
       // Editar Aluno

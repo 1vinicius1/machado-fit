@@ -1,6 +1,6 @@
-/*body,
 
-html {
+
+/*html {
   margin: 0;
   padding: 0;
   font-family: 'Roboto', sans-serif !important;
@@ -70,5 +70,25 @@ html {
   font-weight: 700;
   font-display: swap;
   src: url('../assets/fonts/Roboto-BoldItalic.ttf') format('truetype');
-}*/
+};*/
 
+
+*, *::before, *::after {
+  box-sizing: border-box; /* Most important part for consistent sizing */
+}
+
+body, h1, h2, h3, h4, h5, h6, p, ul, ol, li, figure, figcaption, blockquote, dl, dd {
+  margin: 0;
+  padding: 0;
+}
+
+/* Optional: set a base font and line height */
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.6;
+}
+
+/* Optional: remove list styles */
+ul, ol {
+  list-style: none;
+}

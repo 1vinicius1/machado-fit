@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
-import { ExerciciosAlunoDTO, ExercicioDTO } from "../models/exercicio.model";
+import { ExerciciosAlunoDTO, ExercicioDTO, CadastrarExercicioCmd } from "../models/exercicio.model";
 import { CadastrarTreinoCmd, TreinoDTO } from "../models/treino.model";
 
 @Injectable({ providedIn: "root" })
@@ -22,6 +22,12 @@ export class TreinoService {
   }
 
   // --- Exercícios ---
+  cadastrarExercicio(cmd: CadastrarExercicioCmd): Observable<string> {
+    return this.http.post(`${this.apiUrl}/exercicio/cadastrar`, cmd, {
+      responseType: "text",
+    });
+  }
+
   // Usado pelo Aluno (Visão completa da semana)
   listarExerciciosPorAluno(idAluno: number): Observable<ExerciciosAlunoDTO[]> {
     return this.http.get<ExerciciosAlunoDTO[]>(

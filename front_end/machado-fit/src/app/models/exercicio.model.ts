@@ -21,4 +21,12 @@ interface ExerciciosAlunoDTO {
   concluido?: boolean;
 }
 
-export { ExercicioDTO, ExerciciosAlunoDTO };
+interface CadastrarExercicioCmd {
+  idTreino: number;
+  nomeTreino: string;
+  repeticoes: string;
+  carga: string;
+  observacoes?: string;
+}
+
+export { ExercicioDTO, ExerciciosAlunoDTO, CadastrarExercicioCmd };

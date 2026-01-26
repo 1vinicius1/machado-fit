@@ -1,16 +1,16 @@
-<app-header></app-header>
-
-<div class="container-fluid">
+<div>
+  <app-header></app-header>
   <div class="row">
-    <!-- Sidebar: some no mobile, aparece a partir do md -->
-    <aside class="d-none d-md-block col-md-3 col-lg-2 p-0">
-      <app-sidebar></app-sidebar>
-    </aside>
 
-    <!-- Conteúdo -->
-    <main class="col-12 col-md-9 col-lg-10 pt-3">
+    <div class="col-12 col-xl-2">
+      <app-sidebar></app-sidebar>
+    </div>
+
+    <div class="col-12 col-xl-10">
       <router-outlet></router-outlet>
-      <app-footer></app-footer>
-    </main>
+    </div>
+
   </div>
+
+  <app-footer></app-footer>
 </div>

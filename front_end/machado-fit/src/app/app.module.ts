@@ -3,6 +3,9 @@ import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 import { AppRoutingModule } from "./app-routing.module";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 // --- Componentes Principais ---
 import { AppComponent } from "./app.component";
@@ -31,6 +34,8 @@ import { EditarAlunoComponent } from "./pages/editar-aluno/editar-aluno.componen
 import { CadastrarAlunoComponent } from "./pages/cadastrar-aluno/cadastrar-aluno.component";
 import { FooterComponent } from "./components/footer/footer.component";
 import { DadosAlunoComponent } from './pages/dados-aluno/dados-aluno.component';
+import { PersonalTreinosAlunosComponent } from './pages/personal-treinos-alunos/personal-treinos-alunos.component';
+import { CadastrarExercicioComponent } from './pages/cadastrar-exercicio/cadastrar-exercicio.component';
 
 @NgModule({
   declarations: [
@@ -48,12 +53,19 @@ import { DadosAlunoComponent } from './pages/dados-aluno/dados-aluno.component';
     CadastrarAlunoComponent,
     FooterComponent,
     DadosAlunoComponent,
+    PersonalTreinosAlunosComponent,
+    CadastrarExercicioComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule, // Necessário para [(ngModel)]
     HttpClientModule, // Necessário para chamadas API
+    BrowserAnimationsModule,
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory,
+    }),
   ],
   providers: [
     AuthService,
@@ -64,4 +76,5 @@ import { DadosAlunoComponent } from './pages/dados-aluno/dados-aluno.component';
   ],
   bootstrap: [AppComponent],
 })
+
 export class AppModule {}
